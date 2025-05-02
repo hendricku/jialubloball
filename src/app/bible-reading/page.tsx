@@ -46,7 +46,7 @@ export default function Contact() {
       } else {
         throw new Error('Failed to process form');
       }
-    } catch (error) {
+    } catch {
       toast.error('Failed to process form. Please try again.', {
         position: 'bottom-right',
         autoClose: 3000,
