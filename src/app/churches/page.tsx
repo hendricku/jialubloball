@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import { useState } from 'react';
+import ChurchMap from '@/components/ChurchMap';
 
 interface Church {
   name: string;
@@ -249,5 +250,5 @@ export default function Churches() {
         </AnimatePresence>
       </div>
     </main>
-  );
+  ); // Remove the extra map section and end the component properly
 }

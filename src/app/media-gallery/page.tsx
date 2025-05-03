@@ -27,22 +27,22 @@ export default function MediaGallery() {
               className="rounded-2xl overflow-hidden shadow-2xl bg-white"
             >
               <div className="aspect-video w-full">
-                <video 
-                  controls
-                  preload="metadata"
-                  className="w-full h-full object-cover"
-                  poster="/videos/jiacsflu-thumbnail.jpg"
-                >
-                  <source src="/videos/jiacsflu.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                <iframe
+                  src={churchVideos[0].embedUrl}
+                  width={churchVideos[0].width}
+                  height={churchVideos[0].height}
+                  style={{ border: 'none', width: '100%', height: '100%' }}
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                ></iframe>
               </div>
               <div className="p-8 bg-gradient-to-r from-amber-50 to-white">
                 <h2 className="text-4xl font-serif text-amber-900 mb-4">
-                  JIA CSFLU PRESENTS: MAGA-ALAB PARIN SA 2025
+                  {churchVideos[0].title}
                 </h2>
                 <p className="text-2xl text-gray-600 font-serif">
-                  Worship highlights from our church community
+                  {churchVideos[0].description}
                 </p>
               </div>
             </motion.div>
@@ -59,27 +59,18 @@ export default function MediaGallery() {
               className="relative rounded-xl overflow-hidden shadow-xl bg-white"
             >
               <div className="aspect-video">
-                {!video.isYouTube ? (
-                  <video 
-                    controls
-                    preload="metadata"
-                    className="w-full h-full object-cover"
-                  >
-                    <source src={video.embedUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                ) : (
-                  <iframe
-                    src={video.embedUrl}
-                    width={video.width}
-                    height={video.height}
-                    style={{ border: 'none', overflow: 'hidden', width: '100%', height: '100%' }}
-                    scrolling="no"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    allow="clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  ></iframe>
-                )}
+                <iframe
+                  src={video.embedUrl}
+                  width={video.width}
+                  height={video.height}
+                  style={{ border: 'none', width: '100%', height: '100%' }}
+                  frameBorder="0"
+                  allowFullScreen
+                  allow={video.isYouTube 
+                    ? "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    : "autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  }
+                ></iframe>
               </div>
               <div className="p-4">
                 <h3 className="text-xl font-serif text-amber-900">{video.title}</h3>
