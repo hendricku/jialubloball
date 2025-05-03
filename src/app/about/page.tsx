@@ -216,7 +216,7 @@ export default function About() {
                     <span className="animate-pulse text-red-500">●</span>
                     <h3 className="text-xl font-semibold text-gray-900">First Service</h3>
                   </div>
-                  <p className="text-lg text-gray-700 mb-2">8:00 AM - 10:00 AM</p>
+                  <p className="text-lg text-gray-700 mb-2">7:30 AM - 9:30 AM</p>
                   <div className="flex items-center gap-2 text-blue-600">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
@@ -228,7 +228,7 @@ export default function About() {
 
                 <div className="bg-white shadow-lg rounded-2xl p-6 border border-blue-100">
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">Second Service</h3>
-                  <p className="text-lg text-gray-700 mb-2">10:00 AM - 12:00 PM</p>
+                  <p className="text-lg text-gray-700 mb-2">10:00 AM - 11:30 PM</p>
                   <div className="flex items-center gap-2 text-blue-600">
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clipRule="evenodd"/>

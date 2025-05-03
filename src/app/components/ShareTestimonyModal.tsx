@@ -23,7 +23,7 @@ Testimony:
 - How this experience strengthened your faith]
     `.trim();
 
-    // Using mailto protocol instead of Gmail URL
+  
     const mailtoLink = `mailto:hendrickcastro017@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     window.location.href = mailtoLink;
   };

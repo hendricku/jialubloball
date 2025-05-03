@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import toast, { Toaster } from 'react-hot-toast';
 
-// Define the type for a reading entry
+
 interface ReadingEntry {
   day: number;
   morning: string;
@@ -13,7 +13,7 @@ interface ReadingEntry {
 }
 
 export default function BibleReading() {
-  const [selectedMonth, setSelectedMonth] = useState('april');
+  const [selectedMonth, setSelectedMonth] = useState('may');
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -29,7 +29,7 @@ export default function BibleReading() {
     });
   };
 
-  // --- Reading Data ---
+ 
   const januaryReadings: ReadingEntry[] = [
     { day: 1, morning: 'Matthew 1', evening: 'Genesis 1,2,3' },
     { day: 2, morning: '2', evening: '4,5,6' },
@@ -78,7 +78,7 @@ export default function BibleReading() {
     { day: 11, morning: '26:1-25', evening: '11,12' },
     { day: 12, morning: '26:26-50', evening: '13,14' },
     { day: 13, morning: '26:51-75', evening: '15,16' },
-    { day: 14, morning: '27:1-26', evening: '17,18' }, // Corrected Evening Reading (was 19,20 twice)
+    { day: 14, morning: '27:1-26', evening: '17,18' },
     { day: 15, morning: '27:27-50', evening: '19,20' },
     { day: 16, morning: '27:51-66', evening: '21,22' },
     { day: 17, morning: '28', evening: '23,24' },
@@ -197,7 +197,7 @@ export default function BibleReading() {
     { day: 31, morning: '12:1-26', evening: '13,14' }
   ];
 
-  // --- Map month names to their respective reading arrays ---
+
   const allReadings: { [key: string]: ReadingEntry[] } = {
     january: januaryReadings,
     february: februaryReadings,
@@ -206,10 +206,10 @@ export default function BibleReading() {
     may: mayReadings,
   };
 
-  // --- Get the readings for the currently selected month ---
-  const currentReadings = allReadings[selectedMonth] || []; // Fallback to empty array
 
-  // List of available months (used for buttons)
+  const currentReadings = allReadings[selectedMonth] || [];
+
+
   const availableMonths = Object.keys(allReadings);
 
   return (
@@ -231,7 +231,7 @@ export default function BibleReading() {
           </p>
 
           <div className="flex justify-center gap-4 mb-12 flex-wrap">
-            {/* Dynamically generate buttons from available months */}
+ 
             {availableMonths.map((month) => (
               <button
                 key={month}
@@ -249,10 +249,10 @@ export default function BibleReading() {
         </motion.div>
 
         <motion.div
-          key={selectedMonth} // Ensures animation runs when month changes
+          key={selectedMonth}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }} // Smooth transition between months
+          transition={{ duration: 0.3 }}
           className="max-w-5xl mx-auto"
         >
           <div className="relative book-container">
@@ -268,11 +268,11 @@ export default function BibleReading() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {/* --- Morning Reading Column --- */}
+               
                 <div className="bg-white p-6 sm:p-8 rounded-lg shadow-inner border border-amber-100">
                   <h3 className="text-2xl font-serif font-bold text-amber-800 mb-6 text-center">Morning Reading</h3>
                   <div className="space-y-4">
-                    {/* Map over the CURRENT month's readings */}
+                
                     {currentReadings.map((reading) => (
                       <div
                         key={`morning-${reading.day}`}
@@ -289,7 +289,7 @@ export default function BibleReading() {
                           className="opacity-0 group-hover:opacity-100 transition-opacity absolute right-3 text-amber-600 hover:text-amber-800"
                           title="Copy verse"
                         >
-                          {/* Copy Icon SVG */}
+                       
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                             <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
@@ -297,18 +297,18 @@ export default function BibleReading() {
                         </button>
                       </div>
                     ))}
-                    {/* Handle case where there are no readings */}
+                 
                     {currentReadings.length === 0 && (
                        <p className="text-center text-gray-500 italic">No readings found for this month.</p>
                     )}
                   </div>
                 </div>
 
-                {/* --- Evening Reading Column --- */}
+          
                 <div className="bg-white p-6 sm:p-8 rounded-lg shadow-inner border border-amber-100">
                   <h3 className="text-2xl font-serif font-bold text-amber-800 mb-6 text-center">Evening Reading</h3>
                   <div className="space-y-4">
-                     {/* Map over the CURRENT month's readings */}
+                   
                     {currentReadings.map((reading) => (
                       <div
                         key={`evening-${reading.day}`}
@@ -325,7 +325,7 @@ export default function BibleReading() {
                           className="opacity-0 group-hover:opacity-100 transition-opacity absolute right-3 text-amber-600 hover:text-amber-800"
                           title="Copy verse"
                         >
-                          {/* Copy Icon SVG */}
+                        
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
                             <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
@@ -333,7 +333,7 @@ export default function BibleReading() {
                         </button>
                       </div>
                     ))}
-                     {/* Handle case where there are no readings */}
+                     
                      {currentReadings.length === 0 && (
                        <p className="text-center text-gray-500 italic">No readings found for this month.</p>
                     )}
@@ -341,7 +341,7 @@ export default function BibleReading() {
                 </div>
               </div>
 
-              {/* Decorative corners */}
+           
               <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-amber-300 opacity-50"></div>
               <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-amber-300 opacity-50"></div>
               <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-amber-300 opacity-50"></div>
