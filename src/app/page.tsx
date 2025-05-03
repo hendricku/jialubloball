@@ -78,23 +78,18 @@ const ministriesData = [
     description: "Nurturing young hearts in faith and values",
     link: "/children-ministry"
   },
+  
   {
-    icon: "👥",
-    title: "Cell Groups",
-    description: "Small group fellowship and discipleship",
-    link: "/cell-groups"
-  },
-  {
-    icon: "🎓",
+    icon: "📹",
     title: "Media Team",
     description: "Media and communication support",
     link: "/media-team"
   },
   {
-    icon: "🤝",
-    title: "Outreach",
-    description: "Community service and evangelism programs"
-
+    icon: "👩‍🍳",
+    title: "Kitchen Ministry",
+    description: "Serving with love through food preparation and fellowship meals",
+    link: "/kitchen-ministry"
   }
 ];
 
@@ -114,9 +109,20 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % bannerSlides.length);
+      setCurrentSlide((prev) => (prev - 1 + bannerSlides.length) % bannerSlides.length);
     }, 5000);
     return () => clearInterval(timer);
+  }, []);
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Add this useEffect for scroll detection
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -202,12 +208,16 @@ export default function Home() {
         className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24"
         initial="hidden"
         animate="visible"
+        style={{
+          backgroundImage: 'url(/subtle-pattern.png)',
+          backgroundAttachment: 'fixed'
+        }}
         variants={{
           hidden: { opacity: 0 },
           visible: {
             opacity: 1,
             transition: {
-              staggerChildren: 0.1
+              staggerChildren: 0.2
             }
           }
         }}
@@ -275,8 +285,12 @@ export default function Home() {
           <h2 className="heading-lg text-center mb-16">About Us</h2>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <div className="relative">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   Our Vision
@@ -287,9 +301,14 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <div className="relative">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   Our Mission
@@ -306,7 +325,7 @@ export default function Home() {
                   </blockquote>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </motion.section>
@@ -407,7 +426,7 @@ export default function Home() {
           visible: { opacity: 1, y: 0 }
         }}
       >
-        <h2 className="text-6xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-600">
+        <h2 className="text-6xl font-bold text-center mb-8 heading-gradient">
           Our Ministries
         </h2>
         <p className="text-xl text-gray-600 text-center mb-16 max-w-2xl mx-auto">
@@ -427,9 +446,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
+
                 whileHover={{ 
-                  scale: 1.03,
-                  y: -5
+                  scale: 1.05,
+                  rotate: [0, -1, 1, 0],
+                  transition: {
+                    rotate: {
+                      repeat: 0,
+                      duration: 0.3
+                    }
+                  }
                 }}
               >
                 <div className="text-5xl mb-6">{ministry.icon}</div>
@@ -574,11 +600,134 @@ export default function Home() {
       </section>
 
 
-      <footer className="py-8 border-t">
-        <div className="text-center">
-          <p className="mb-4">&quot;To God be the glory!&quot;</p>
-          <p className="text-sm text-gray-600">© {new Date().getFullYear()} Jesus Is Alive San Fernando</p>
+      {/* Scroll to top button */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showScrollTop ? 1 : 0 }}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="fixed bottom-8 right-8 p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-all z-50"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </motion.button>
+
+      {/* Footer Section */}
+      <motion.footer 
+        className="bg-gradient-to-r from-blue-50 to-purple-50 pt-16 pb-8"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <h4 className="text-2xl font-bold mb-6">About JIA</h4>
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                Where Jesus is ALIVE in every heart, every home, every generation. Join us in our mission to spread God's love throughout La Union and beyond.
+              </p>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <h4 className="text-2xl font-bold mb-6">Quick Links</h4>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/churches" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    Our Churches
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pastpreachings" className="text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                    Past Preachings
+                  </Link>
+                </li>
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+            >
+              <h4 className="text-2xl font-bold mb-6">Connect With Us</h4>
+              <div className="space-y-4">
+                <a href="mailto:info@jiasanfernando.com" 
+                   className="flex items-center gap-3 text-gray-600 hover:text-blue-600 transition-colors">
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                      <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                  </div>
+                  info@jiasanfernando.com
+                </a>
+                <div className="flex gap-4">
+                  <motion.a 
+                    href="https://facebook.com/jiac.launion" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+                    </svg>
+                  </motion.a>
+                  <motion.a 
+                    href="#" 
+                    className="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    </svg>
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div 
+            className="border-t border-gray-200 pt-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+          >
+            <p className="text-2xl font-serif text-gray-700 mb-4">&quot;To God be the glory!&quot;</p>
+            <p className="text-gray-600">© {new Date().getFullYear()} Jesus Is Alive San Fernando. All rights reserved.</p>
+          </motion.div>
         </div>
-      </footer>
+      </motion.footer>
     </main>
-  );}
+  );
+}

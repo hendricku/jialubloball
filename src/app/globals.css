@@ -395,3 +395,17 @@ html::selection {
   background: white;
 }
 
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.heading-gradient {
+  background: linear-gradient(90deg, #2563eb, #4f46e5, #2563eb);
+  background-size: 200% auto;
+  animation: gradientFlow 3s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
